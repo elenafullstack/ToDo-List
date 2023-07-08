@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const todoItemRouter = require("./controllers/todoItem");
+app.use(express.static("build"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
