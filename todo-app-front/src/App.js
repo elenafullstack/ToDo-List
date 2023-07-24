@@ -10,9 +10,13 @@ const App = () => {
   useEffect(() => {
     toDoService.getAll().then((toDos) => setToDos(toDos));
   }, []);
+
+  const MainComponent = () => {};
   return (
     <>
-      <TodoForm />
+      <h1>Holaaaaaa</h1>
+      {/* <TodoForm /> */}
+      <MainComponent />
       {toDos.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}

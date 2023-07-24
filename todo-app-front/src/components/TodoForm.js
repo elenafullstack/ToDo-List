@@ -26,9 +26,9 @@ const statuses = [
 ];
 
 const TodoForm = () => {
-  const [name, setName] = useState("");
   const [status, setStatus] = useState("Not started");
   const [deadline, setDeadline] = useState(null);
+  const [name, setName] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
