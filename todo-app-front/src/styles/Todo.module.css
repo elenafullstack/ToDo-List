@@ -11,16 +11,34 @@
 }
 
 .textDivider {
-  width: 90%;
+  width: 86%;
   display: flex;
   flex-direction: column;
 }
 
-.listitem::before {
+.listitemNstarted::before {
   content: "";
 
   width: 35px;
   height: 35px;
   border-radius: 50%;
   background-color: #f7f168;
+}
+
+.listitemOprogress::before {
+  content: "";
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #68f787;
+}
+
+.listitemCompleted::before {
+  content: "";
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #b8bdb9;
 }

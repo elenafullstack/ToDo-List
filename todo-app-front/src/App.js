@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import toDoService from "./services/toDos";
 import TodoForm from "./components/TodoForm";
-import Todo from "./components/Todo";
-import styles from "./styles/Todo.module.css";
 import {
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  ListItemIcon,
-  Divider,
-} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+  ToDoNotStarted,
+  ToDoOnProgress,
+  ToDoCompleted,
+} from "./components/ToDo";
+
+import { Typography } from "@mui/material";
 
 // Import other components as needed
 
@@ -22,50 +18,36 @@ const App = () => {
     toDoService.getAll().then((toDos) => setToDos(toDos));
   }, []);
 
-  const ToDo = () => {
-    return (
-      <List className={styles.list}>
-        <ListItem className={styles.listitem}>
-          <div className={styles.textDivider}>
-            <ListItemText
-              primary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-              secondary="12/12/23"
-            />
-            <Divider className={styles.divider} />
-          </div>
-
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-        </ListItem>
-
-        <ListItem className={styles.listitem}>
-          <div className={styles.textDivider}>
-            <ListItemText
-              primary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-              secondary="12/12/23"
-            />
-            <Divider className={styles.divider} />
-          </div>
-
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-        </ListItem>
-      </List>
-    );
-  };
+  const notStarted = toDos.filter(
+    (task) => task.status === "Not started" || task.status === "Not Started"
+  );
+  const onProgress = toDos.filter((task) => task.status === "On progress");
+  const completed = toDos.filter((task) => task.status === "Completed");
 
   return (
     <>
       <Typography variant="h4" fontWeight="bold">
         My ToDo - tasks
       </Typography>
+
+      {notStarted.map((todo, index) => (
+        <ToDoNotStarted
+          key={index}
+          todo={todo}
+          index={index}
+          notStarted={notStarted}
+        />
+      ))}
+
+      {onProgress.map((todo, index) => (
+        <ToDoOnProgress key={index} todo={todo} />
+      ))}
+
+      {completed.map((todo, index) => (
+        <ToDoCompleted key={index} todo={todo} />
+      ))}
+
       {/* <TodoForm /> */}
-      <ToDo />
-      {/* {toDos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
-      ))} */}
     </>
   );
 };

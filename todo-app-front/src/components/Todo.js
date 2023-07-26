@@ -1,13 +1,75 @@
 import React from "react";
+import styles from "../styles/Todo.module.css";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Divider,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
-const Todo = (props) => {
+const ToDoNotStarted = (props) => {
   return (
-    <>
-      <h1>{props.todo.title}</h1>
-      <h1>{props.todo.deadline}</h1>
-      <h1>{props.todo.status}</h1>
-    </>
+    <List className={styles.list}>
+      <ListItem className={`${styles.listitem} ${styles.listitemNstarted}`}>
+        <div className={styles.textDivider}>
+          <ListItemText
+            primary={props.todo.title}
+            secondary={new Date(props.todo.deadline).toLocaleDateString()}
+          />
+
+          <Divider className={styles.divider} />
+        </div>
+
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+      </ListItem>
+    </List>
   );
 };
 
-export default Todo;
+const ToDoOnProgress = (props) => {
+  return (
+    <List className={styles.list}>
+      <ListItem className={`${styles.listitem} ${styles.listitemOprogress}`}>
+        <div className={styles.textDivider}>
+          <ListItemText
+            primary={props.todo.title}
+            secondary={new Date(props.todo.deadline).toLocaleDateString()}
+          />
+
+          <Divider className={styles.divider} />
+        </div>
+
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+      </ListItem>
+    </List>
+  );
+};
+
+const ToDoCompleted = (props) => {
+  return (
+    <List className={styles.list}>
+      <ListItem className={`${styles.listitem} ${styles.listitemCompleted}`}>
+        <div className={styles.textDivider}>
+          <ListItemText
+            primary={props.todo.title}
+            secondary={new Date(props.todo.deadline).toLocaleDateString()}
+          />
+
+          <Divider className={styles.divider} />
+        </div>
+
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+      </ListItem>
+    </List>
+  );
+};
+
+export { ToDoNotStarted, ToDoOnProgress, ToDoCompleted };
