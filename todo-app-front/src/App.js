@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import toDoService from "./services/toDos";
 import TodoForm from "./components/TodoForm";
+import Instructions from "./components/Instructions";
 import {
   ToDoNotStarted,
   ToDoOnProgress,
   ToDoCompleted,
 } from "./components/ToDo";
-
-import { Typography } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { Typography, List, ListItem, ListItemIcon } from "@mui/material";
+import styles from "./styles/Todo.module.css";
 
 // Import other components as needed
 
@@ -30,22 +32,31 @@ const App = () => {
         My ToDo - tasks
       </Typography>
 
-      {notStarted.map((todo, index) => (
-        <ToDoNotStarted
-          key={index}
-          todo={todo}
-          index={index}
-          notStarted={notStarted}
-        />
-      ))}
+      <Instructions />
 
-      {onProgress.map((todo, index) => (
-        <ToDoOnProgress key={index} todo={todo} />
-      ))}
+      <List>
+        <ListItem className={styles.firstItem}>
+          <ListItemIcon>
+            <AddCircleIcon fontSize="large" />
+          </ListItemIcon>
+        </ListItem>
+        {notStarted.map((todo, index) => (
+          <ToDoNotStarted
+            key={index}
+            todo={todo}
+            index={index}
+            notStarted={notStarted}
+          />
+        ))}
 
-      {completed.map((todo, index) => (
-        <ToDoCompleted key={index} todo={todo} />
-      ))}
+        {onProgress.map((todo, index) => (
+          <ToDoOnProgress key={index} todo={todo} />
+        ))}
+
+        {completed.map((todo, index) => (
+          <ToDoCompleted key={index} todo={todo} />
+        ))}
+      </List>
 
       {/* <TodoForm /> */}
     </>

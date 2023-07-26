@@ -1,6 +1,5 @@
 .list {
   width: "100%";
-  max-width: 360;
 }
 
 .listitem {
@@ -41,4 +40,9 @@
   height: 35px;
   border-radius: 50%;
   background-color: #b8bdb9;
+}
+
+.firstItem {
+  display: flex;
+  justify-content: flex-end !important;
 }

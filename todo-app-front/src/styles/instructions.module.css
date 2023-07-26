@@ -1,0 +1,27 @@
+.linstructions:before {
+  content: "";
+
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  display: flex;
+  margin-right: 1rem;
+}
+
+.linstructions {
+  display: flex;
+  justify-content: space-around !important;
+}
+
+.yellow:before {
+  background-color: #f7f168;
+}
+
+.green:before {
+  background-color: #68f787;
+}
+
+.gray:before {
+  background-color: #b8bdb9;
+}
