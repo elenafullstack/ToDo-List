@@ -16,6 +16,10 @@ import styles from "./styles/Todo.module.css";
 const App = () => {
   const [toDos, setToDos] = useState([]);
 
+  const addNewToDo = (newToDo) => {
+    setToDos((prevToDos) => [...prevToDos, newToDo]);
+  };
+
   useEffect(() => {
     toDoService.getAll().then((toDos) => setToDos(toDos));
   }, []);
@@ -37,8 +41,7 @@ const App = () => {
       <List>
         <ListItem className={styles.firstItem}>
           <ListItemIcon>
-          <MyModal />
-        
+            <MyModal addNewToDo={addNewToDo} />
           </ListItemIcon>
         </ListItem>
         {notStarted.map((todo, index) => (

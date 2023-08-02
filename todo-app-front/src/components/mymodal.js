@@ -32,7 +32,7 @@ const statuses = [
 //   return <></>;
 // };
 
-const MyModal = () => {
+const MyModal = (props) => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("Not started");
   const [deadline, setDeadline] = useState(null);
@@ -61,9 +61,11 @@ const MyModal = () => {
       deadline: deadline,
       status: status,
     };
-    toDoService.postToDo(newToDo);
-    console.log("new todoItem added");
-    setIsSuccess(true);
+    toDoService.postToDo(newToDo).then((response) => {
+      console.log("new todoItem added");
+      setIsSuccess(true);
+      props.addNewToDo(response.data); // Update state with the new ToDo item
+    });
     // Perform further processing or submit the form data
   };
 
