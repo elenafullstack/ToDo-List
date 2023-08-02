@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import toDoService from "./services/toDos";
-import TodoForm from "./components/TodoForm";
+import MyModal from "./components/mymodal";
 import Instructions from "./components/Instructions";
 import {
   ToDoNotStarted,
   ToDoOnProgress,
   ToDoCompleted,
 } from "./components/ToDo";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+
 import { Typography, List, ListItem, ListItemIcon } from "@mui/material";
 import styles from "./styles/Todo.module.css";
 
@@ -37,7 +37,8 @@ const App = () => {
       <List>
         <ListItem className={styles.firstItem}>
           <ListItemIcon>
-            <AddCircleIcon fontSize="large" />
+          <MyModal />
+        
           </ListItemIcon>
         </ListItem>
         {notStarted.map((todo, index) => (
