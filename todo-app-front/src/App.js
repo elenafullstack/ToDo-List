@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import toDoService from "./services/toDos";
-import MyModal from "./components/mymodal";
+import AddModal from "./components/addmodal";
 import Instructions from "./components/Instructions";
 import {
   ToDoNotStarted,
@@ -27,6 +27,14 @@ const App = () => {
   const notStarted = toDos.filter(
     (task) => task.status === "Not started" || task.status === "Not Started"
   );
+
+  const updateToDo = (updatedToDo) => {
+    const updatedToDos = toDos.map((todo) =>
+      todo.id === updatedToDo.id ? updatedToDo : todo
+    );
+    setToDos(updatedToDos);
+  };
+
   const onProgress = toDos.filter((task) => task.status === "On progress");
   const completed = toDos.filter((task) => task.status === "Completed");
 
@@ -41,7 +49,7 @@ const App = () => {
       <List>
         <ListItem className={styles.firstItem}>
           <ListItemIcon>
-            <MyModal addNewToDo={addNewToDo} />
+            <AddModal addNewToDo={addNewToDo} />
           </ListItemIcon>
         </ListItem>
         {notStarted.map((todo, index) => (
@@ -50,6 +58,8 @@ const App = () => {
             todo={todo}
             index={index}
             notStarted={notStarted}
+            todo={todo}
+            updateToDo={updateToDo}
           />
         ))}
 

@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "../styles/Todo.module.css";
 import {
-  List,
+  Button,
   ListItem,
   ListItemText,
   ListItemIcon,
   Divider,
 } from "@mui/material";
+import EditModal from "./editmodal";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ToDoNotStarted = (props) => {
@@ -22,7 +23,7 @@ const ToDoNotStarted = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditIcon />
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
       </ListItemIcon>
     </ListItem>
   );
@@ -41,7 +42,9 @@ const ToDoOnProgress = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditIcon />
+        <Button>
+          <EditIcon />
+        </Button>
       </ListItemIcon>
     </ListItem>
   );
@@ -60,7 +63,9 @@ const ToDoCompleted = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditIcon />
+        <Button>
+          <EditIcon />
+        </Button>
       </ListItemIcon>
     </ListItem>
   );

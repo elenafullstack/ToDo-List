@@ -10,6 +10,10 @@ const postToDo = (toDo) => {
   return axios.post(toDoUrl, toDo);
 };
 
-const toDoService = { getAll, postToDo };
+const updateToDo = (id, newToDo) => {
+  return axios.put(`${toDoUrl}/${id}`, newToDo);
+};
+
+const toDoService = { getAll, postToDo, updateToDo };
 
 export default toDoService;

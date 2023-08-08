@@ -32,7 +32,7 @@ const statuses = [
 //   return <></>;
 // };
 
-const MyModal = (props) => {
+const AddModal = (props) => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("Not started");
   const [deadline, setDeadline] = useState(null);
@@ -51,21 +51,34 @@ const MyModal = (props) => {
     setDeadline(date);
   };
 
+  useEffect(() => {
+    if (!open) {
+      setName("");
+      setStatus("Not started");
+      setDeadline(null);
+    }
+  }, [open]);
+
+  const isFormFilled = name !== "" && deadline !== null && status !== "";
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(name);
     console.log(deadline);
     console.log(status);
-    const newToDo = {
-      title: name,
-      deadline: deadline,
-      status: status,
-    };
-    toDoService.postToDo(newToDo).then((response) => {
-      console.log("new todoItem added");
-      setIsSuccess(true);
-      props.addNewToDo(response.data); // Update state with the new ToDo item
-    });
+    // Conditionally handle form submission or set the error
+    toDoService
+      .postToDo({
+        title: name,
+        deadline: deadline,
+        status: status,
+      })
+      .then((response) => {
+        console.log("new todoItem added");
+        setIsSuccess(true);
+        props.addNewToDo(response.data); // Update state with the new ToDo item
+      });
+
     // Perform further processing or submit the form data
   };
 
@@ -105,7 +118,12 @@ const MyModal = (props) => {
             <div className="success-message">Form submitted successfully!</div>
           ) : (
             <Container className={styles.container}>
-              <Typography variant="h4" component="h4" color="primary">
+              <Typography
+                variant="h4"
+                component="h4"
+                color="primary"
+                className={styles.title}
+              >
                 Create a ToDo-item
               </Typography>
 
@@ -167,7 +185,12 @@ const MyModal = (props) => {
                     </FormControl>
                   </LocalizationProvider>
                   <div>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      disabled={!isFormFilled}
+                    >
                       Submit
                     </Button>
                   </div>
@@ -182,4 +205,4 @@ const MyModal = (props) => {
   );
 };
 
-export default MyModal;
+export default AddModal;

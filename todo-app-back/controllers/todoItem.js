@@ -5,6 +5,7 @@ const TodoItem = require("../models/todoItem");
 
 todoItemRouter.post("/", async (request, response) => {
   const body = request.body;
+  console.log(body.deadline);
 
   const deadline = moment(body.deadline, [
     "DD/MM/YYYY",
@@ -29,7 +30,11 @@ todoItemRouter.get("/", (req, res) => {
 
 todoItemRouter.put("/:id", async (request, response) => {
   const body = request.body;
-  const deadline = moment(body.deadline, "DD/MM/YYYY").toDate();
+  console.log(body.deadline);
+  const deadline = moment(body.deadline, [
+    "DD/MM/YYYY",
+    moment.ISO_8601,
+  ]).toDate();
 
   const updated = {
     title: body.title,
