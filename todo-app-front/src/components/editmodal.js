@@ -108,7 +108,7 @@ const EditModal = (props) => {
           }}
         >
           {isSuccess ? (
-            <div className="success-message">Form submitted successfully!</div>
+            <div className="success-message">ToDo-item edited succesfully!</div>
           ) : (
             <Container className={styles.container}>
               <Typography
@@ -153,8 +153,6 @@ const EditModal = (props) => {
                     sx={{ width: "80%" }}
                     id="Status"
                     variant="outlined"
-                    select
-                    defaultValue="Not started"
                     helperText="Select status"
                     value={status}
                     onChange={handleStatusChange}

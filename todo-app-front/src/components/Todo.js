@@ -8,7 +8,7 @@ import {
   Divider,
 } from "@mui/material";
 import EditModal from "./editmodal";
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteModal from "./deletemodal";
 
 const ToDoNotStarted = (props) => {
   return (
@@ -24,6 +24,9 @@ const ToDoNotStarted = (props) => {
 
       <ListItemIcon>
         <EditModal todo={props.todo} updateToDo={props.updateToDo} />
+      </ListItemIcon>
+      <ListItemIcon>
+        <DeleteModal todo={props.todo} deleteToDo={props.deleteToDo} />
       </ListItemIcon>
     </ListItem>
   );
@@ -42,9 +45,7 @@ const ToDoOnProgress = (props) => {
       </div>
 
       <ListItemIcon>
-        <Button>
-          <EditIcon />
-        </Button>
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
       </ListItemIcon>
     </ListItem>
   );
@@ -63,9 +64,7 @@ const ToDoCompleted = (props) => {
       </div>
 
       <ListItemIcon>
-        <Button>
-          <EditIcon />
-        </Button>
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
       </ListItemIcon>
     </ListItem>
   );

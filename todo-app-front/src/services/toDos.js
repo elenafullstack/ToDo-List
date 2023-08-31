@@ -14,6 +14,12 @@ const updateToDo = (id, newToDo) => {
   return axios.put(`${toDoUrl}/${id}`, newToDo);
 };
 
-const toDoService = { getAll, postToDo, updateToDo };
+const deleteToDo = (toDo) => {
+  const toDoUrlWithId = `${toDoUrl}/${toDo.id}`;
+
+  return axios.delete(toDoUrlWithId);
+};
+
+const toDoService = { getAll, postToDo, updateToDo, deleteToDo };
 
 export default toDoService;

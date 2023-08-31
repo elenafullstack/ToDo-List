@@ -35,6 +35,12 @@ const App = () => {
     setToDos(updatedToDos);
   };
 
+  const deleteToDo = (deletedToDo) => {
+    console.log("moi");
+    const updatedToDos = toDos.filter((todo) => todo.id !== deletedToDo.id);
+    setToDos(updatedToDos);
+  };
+
   const onProgress = toDos.filter((task) => task.status === "On progress");
   const completed = toDos.filter((task) => task.status === "Completed");
 
@@ -60,6 +66,7 @@ const App = () => {
             notStarted={notStarted}
             todo={todo}
             updateToDo={updateToDo}
+            deleteToDo={deleteToDo}
           />
         ))}
 
