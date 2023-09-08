@@ -14,7 +14,7 @@ const Instructions = () => {
       </ListItem>
       <ListItem className={`${styles.linstructions} ${styles.green}`}>
         <ListItemText
-          primary="On Progress"
+          primary="In Progress"
           primaryTypographyProps={{ variant: "caption" }}
         />
       </ListItem>

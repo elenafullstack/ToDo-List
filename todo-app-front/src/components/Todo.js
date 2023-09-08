@@ -23,7 +23,7 @@ const ToDoNotStarted = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} deleteToDo={props.deleteToDo} />
       </ListItemIcon>
       <ListItemIcon>
         <DeleteModal todo={props.todo} deleteToDo={props.deleteToDo} />
@@ -45,7 +45,10 @@ const ToDoOnProgress = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} deleteToDo={props.deleteToDo}/>
+      </ListItemIcon>
+      <ListItemIcon>
+        <DeleteModal todo={props.todo} deleteToDo={props.deleteToDo} />
       </ListItemIcon>
     </ListItem>
   );
@@ -53,6 +56,7 @@ const ToDoOnProgress = (props) => {
 
 const ToDoCompleted = (props) => {
   return (
+
     <ListItem className={`${styles.listitem} ${styles.listitemCompleted}`}>
       <div className={styles.textDivider}>
         <ListItemText
@@ -64,7 +68,10 @@ const ToDoCompleted = (props) => {
       </div>
 
       <ListItemIcon>
-        <EditModal todo={props.todo} updateToDo={props.updateToDo} />
+        <EditModal todo={props.todo} updateToDo={props.updateToDo} deleteToDo={props.deleteToDo}/>
+      </ListItemIcon>
+      <ListItemIcon>
+        <DeleteModal todo={props.todo} deleteToDo={props.deleteToDo} />
       </ListItemIcon>
     </ListItem>
   );

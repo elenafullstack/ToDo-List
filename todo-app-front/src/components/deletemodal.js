@@ -27,12 +27,11 @@ const DeleteModal = (props) => {
   };
 
   const deleteTask = (event) => {
-    event.preventDefault();
+
 
     toDoService.deleteToDo(props.todo).then((response) => {
       setIsSuccess(true);
-      console.log(response.data);
-      props.deleteToDo(response.data);
+      props.deleteToDo(props.todo);
     });
   };
 
@@ -65,6 +64,7 @@ const DeleteModal = (props) => {
             </div>
           ) : (
             <Container className={styles.container}>
+              <div className={styles.deleteform}>
               <Typography
                 variant="h4"
                 component="h4"
@@ -80,7 +80,9 @@ const DeleteModal = (props) => {
               >
                 Delete task "{props.todo.title}"
               </Typography>
-              <Button onClick={deleteTask}>Delete task</Button>
+              <Button type="submit" variant="contained"
+                      color="primary" onClick={deleteTask}>Delete task</Button>
+              </div>
             </Container>
           )}
           <Button onClick={handleClose}>Close</Button>

@@ -21,7 +21,7 @@ const statuses = [
     value: "Not started",
   },
   {
-    value: "On progress",
+    value: "In progress",
   },
   {
     value: "Completed",
@@ -115,7 +115,7 @@ const AddModal = (props) => {
           }}
         >
           {isSuccess ? (
-            <div className="success-message">Form submitted successfully!</div>
+            <div className="success-message">ToDo-task created successfully!</div>
           ) : (
             <Container className={styles.container}>
               <Typography

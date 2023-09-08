@@ -6,6 +6,7 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import toDoService from "../services/toDos";
 import styles from "../styles/todoform.module.css";
 import dayjs from "dayjs";
+
 import {
   Box,
   TextField,
@@ -14,15 +15,16 @@ import {
   Button,
   Container,
   Typography,
-  MenuItem,
+  MenuItem
+
 } from "@mui/material";
 
 const statuses = [
   {
-    value: "Not Started",
+    value: "Not started",
   },
   {
-    value: "On progress",
+    value: "In progress",
   },
   {
     value: "Completed",
@@ -39,6 +41,7 @@ const EditModal = (props) => {
   const [deadline, setDeadline] = useState(dayjs(props.todo.deadline));
   const [name, setName] = useState(props.todo.title);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage]= useState("")
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -52,15 +55,21 @@ const EditModal = (props) => {
     setDeadline(date);
   };
 
-  const isFormFilled = name !== "" && deadline !== null && status !== "";
-  console.log(name);
-  console.log(status);
 
+
+  const deleteTask = (event) => {
+    event.preventDefault();
+
+    toDoService.deleteToDo(props.todo).then((response) => {
+      setIsSuccess(true);
+      setMessage("ToDo-task deleted succesfully")
+      props.deleteToDo(props.todo);
+    });
+  };
+
+  const isFormFilled = name !== "" && deadline !== null && status !== "";
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(name);
-    console.log(deadline);
-    console.log(status);
     // Conditionally handle form submission or set the error
     toDoService
       .updateToDo(props.todo.id, {
@@ -70,12 +79,16 @@ const EditModal = (props) => {
       })
       .then((response) => {
         setIsSuccess(true);
+        setMessage("ToDo-task edited succesfully")
         props.updateToDo(response.data); // Update the todo in the parent component
       });
     // Perform further processing or submit the form data
   };
 
   const handleOpen = () => {
+    setName(props.todo.title)
+    setDeadline(dayjs(props.todo.deadline))
+    setStatus(props.todo.status)
     setOpen(true);
   };
 
@@ -85,6 +98,7 @@ const EditModal = (props) => {
   };
 
   return (
+
     <div>
       <Button onClick={handleOpen}>
         <EditIcon />
@@ -108,7 +122,7 @@ const EditModal = (props) => {
           }}
         >
           {isSuccess ? (
-            <div className="success-message">ToDo-item edited succesfully!</div>
+            <div className="success-message">{message}</div>
           ) : (
             <Container className={styles.container}>
               <Typography
@@ -149,20 +163,23 @@ const EditModal = (props) => {
                     value={name}
                     onChange={handleNameChange}
                   />
-                  <TextField
+                   {console.log(status)}
+                   <TextField
                     sx={{ width: "80%" }}
                     id="Status"
                     variant="outlined"
                     helperText="Select status"
+                    
                     value={status}
+                    select
                     onChange={handleStatusChange}
-                  >
-                    {statuses.map((option) => (
+                  >  
+ {statuses.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.value}
                       </MenuItem>
                     ))}
-                  </TextField>
+                   </TextField>  
 
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <FormControl sx={{ width: "80%" }} id="Deadline">
@@ -175,7 +192,7 @@ const EditModal = (props) => {
                     </FormControl>
                   </LocalizationProvider>
                   <div className={styles.buttons}>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={deleteTask} >
                       Delete task
                     </Button>
                     <Button

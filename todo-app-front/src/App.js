@@ -41,7 +41,7 @@ const App = () => {
     setToDos(updatedToDos);
   };
 
-  const onProgress = toDos.filter((task) => task.status === "On progress");
+  const onProgress = toDos.filter((task) => task.status === "On progress" || task.status==="In progress");
   const completed = toDos.filter((task) => task.status === "Completed");
 
   return (
@@ -64,18 +64,18 @@ const App = () => {
             todo={todo}
             index={index}
             notStarted={notStarted}
-            todo={todo}
             updateToDo={updateToDo}
             deleteToDo={deleteToDo}
           />
         ))}
 
         {onProgress.map((todo, index) => (
-          <ToDoOnProgress key={index} todo={todo} />
+          <ToDoOnProgress key={index} todo={todo} updateToDo={updateToDo}
+          deleteToDo={deleteToDo} />
         ))}
-
         {completed.map((todo, index) => (
-          <ToDoCompleted key={index} todo={todo} />
+          <ToDoCompleted key={index} todo={todo} updateToDo={updateToDo}
+          deleteToDo={deleteToDo} />
         ))}
       </List>
 
