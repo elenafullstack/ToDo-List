@@ -63,6 +63,7 @@ const EditModal = (props) => {
     toDoService.deleteToDo(props.todo).then((response) => {
       setIsSuccess(true);
       setMessage("ToDo-task deleted succesfully")
+      console.log(message)
       props.deleteToDo(props.todo);
     });
   };
@@ -78,9 +79,10 @@ const EditModal = (props) => {
         status: status,
       })
       .then((response) => {
+        console.log(response.data)
+        props.updateToDo(response.data); // Update the todo in the parent component
         setIsSuccess(true);
         setMessage("ToDo-task edited succesfully")
-        props.updateToDo(response.data); // Update the todo in the parent component
       });
     // Perform further processing or submit the form data
   };
@@ -163,7 +165,6 @@ const EditModal = (props) => {
                     value={name}
                     onChange={handleNameChange}
                   />
-                   {console.log(status)}
                    <TextField
                     sx={{ width: "80%" }}
                     id="Status"

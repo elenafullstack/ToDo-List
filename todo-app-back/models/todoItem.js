@@ -10,11 +10,19 @@ mongoose
     console.log("error connecting to MongoDB:", error.message);
   });
 
+
 const todoItemSchema = new mongoose.Schema({
   title: String,
   deadline: Date,
   status: String,
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: false 
+  // }
 });
+
+
 
 todoItemSchema.set("toJSON", {
   transform: (document, returnedObject) => {

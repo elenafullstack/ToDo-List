@@ -36,7 +36,6 @@ const App = () => {
   };
 
   const deleteToDo = (deletedToDo) => {
-    console.log("moi");
     const updatedToDos = toDos.filter((todo) => todo.id !== deletedToDo.id);
     setToDos(updatedToDos);
   };

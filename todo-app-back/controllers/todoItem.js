@@ -2,10 +2,13 @@ const todoItemRouter = require("express").Router();
 const moment = require("moment");
 
 const TodoItem = require("../models/todoItem");
+const User = require('../models/user')
 
 todoItemRouter.post("/", async (request, response) => {
   const body = request.body;
   console.log(body.deadline);
+
+  // const user = await User.findById(body.userId)
 
   const deadline = moment(body.deadline, [
     "DD/MM/YYYY",
@@ -16,11 +19,18 @@ todoItemRouter.post("/", async (request, response) => {
     title: body.title,
     deadline: deadline,
     status: body.status,
+    // user: user ? user._id : null 
   });
 
-  const saved = await todoItem.save();
-  response.json(saved);
+   const saved = await todoItem.save();
+
+  // if (user) {
+  // user.todoItems = user.todoItems.concat(saved._id)
+  // await user.save()
+response.json(saved);
+  // }
 });
+
 
 todoItemRouter.get("/", (req, res) => {
   TodoItem.find({}).then((todoItem) => {

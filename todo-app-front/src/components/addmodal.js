@@ -76,6 +76,7 @@ const AddModal = (props) => {
       .then((response) => {
         console.log("new todoItem added");
         setIsSuccess(true);
+        console.log(isSuccess)
         props.addNewToDo(response.data); // Update state with the new ToDo item
       });
 
@@ -191,7 +192,7 @@ const AddModal = (props) => {
                       color="primary"
                       disabled={!isFormFilled}
                     >
-                      Submit
+                      Create Task
                     </Button>
                   </div>
                 </Box>

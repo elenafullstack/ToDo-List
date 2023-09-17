@@ -1,5 +1,7 @@
 import axios from "axios";
-const toDoUrl = "http://localhost:3001/api/todoItems";
+// when using dev
+// const toDoUrl = "http://localhost:3001/api/todoItems";
+const toDoUrl = '/api/todoItems'
 
 const getAll = () => {
   const request = axios.get(toDoUrl);

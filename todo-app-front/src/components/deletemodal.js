@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { Modal } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import toDoService from "../services/toDos";
@@ -17,6 +17,8 @@ import {
 const DeleteModal = (props) => {
   const [open, setOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -26,13 +28,21 @@ const DeleteModal = (props) => {
     setIsSuccess(false);
   };
 
+  useEffect(() => {
+    console.log(isSuccess);
+  }, [isSuccess]);
+
   const deleteTask = (event) => {
-
-
-    toDoService.deleteToDo(props.todo).then((response) => {
-      setIsSuccess(true);
-      props.deleteToDo(props.todo);
-    });
+    event.preventDefault();
+    toDoService.deleteToDo(props.todo)
+      .then((response) => {
+        console.log(response); // Check the response
+        setIsSuccess(true);
+        props.deleteToDo(props.todo);
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
   };
 
   return (
@@ -60,7 +70,7 @@ const DeleteModal = (props) => {
         >
           {isSuccess ? (
             <div className="success-message">
-              ToDo-item deleted succesfully!
+              ToDo-task deleted succesfully!
             </div>
           ) : (
             <Container className={styles.container}>
@@ -80,7 +90,7 @@ const DeleteModal = (props) => {
               >
                 Delete task "{props.todo.title}"
               </Typography>
-              <Button type="submit" variant="contained"
+              <Button variant="contained"
                       color="primary" onClick={deleteTask}>Delete task</Button>
               </div>
             </Container>
